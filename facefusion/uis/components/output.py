@@ -64,10 +64,13 @@ def start() -> Tuple[gradio.Button, gradio.Button]:
 
 
 def process() -> Tuple[gradio.Image, gradio.Video, gradio.Button, gradio.Button]:
-	normed_output_path = normalize_output_path(facefusion.globals.target_path, facefusion.globals.output_path)
-	if facefusion.globals.system_memory_limit > 0:
-		limit_system_memory(facefusion.globals.system_memory_limit)
-	conditional_process()
+	normed_output_path = ''
+	for path in facefusion.globals.target_paths:
+		facefusion.globals.target_path = path
+		normed_output_path = normalize_output_path(facefusion.globals.target_path, facefusion.globals.output_path)
+		if facefusion.globals.system_memory_limit > 0:
+			limit_system_memory(facefusion.globals.system_memory_limit)
+		conditional_process()
 	if is_image(normed_output_path):
 		return gradio.Image(value = normed_output_path, visible = True), gradio.Video(value = None, visible = False), gradio.Button(visible = True), gradio.Button(visible = False)
 	if is_video(normed_output_path):

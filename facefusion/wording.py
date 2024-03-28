@@ -184,6 +184,7 @@ WORDING : Dict[str, Any] =\
 		'source_file': 'SOURCE',
 		# target
 		'target_file': 'TARGET',
+		'target_files': 'BATCH TARGET',
 		# temp frame
 		'temp_frame_format_dropdown': 'TEMP FRAME FORMAT',
 		# trim frame
